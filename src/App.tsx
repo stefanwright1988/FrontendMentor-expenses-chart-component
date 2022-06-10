@@ -1,12 +1,10 @@
-import React from "react";
 import Chart from "./components/Chart";
 import { StyledApp } from "./App.styled";
-import { createGlobalStyle, ThemeProvider } from "styled-components";
-import { defaultTheme } from "./theme";
+import { createGlobalStyle } from "styled-components";
 import Balance from "./components/Balance";
+import useAxios from "axios-hooks";
 
-function App() {
-  const GlobalStyle = createGlobalStyle`
+const GlobalStyle = createGlobalStyle`
     /* http://meyerweb.com/eric/tools/css/reset/ 
       v2.0 | 20110126
       License: none (public domain)
@@ -28,8 +26,7 @@ function App() {
       margin: 0;
       padding: 0;
       border: 0;
-      font-size: 100%;
-      font: inherit;
+      font-size: 18px;
       vertical-align: baseline;
     }
     /* HTML5 display-role reset for older browsers */
@@ -38,7 +35,6 @@ function App() {
       display: block;
     }
     body {
-      line-height: 1;
     }
     ol, ul {
       list-style: none;
@@ -57,21 +53,31 @@ function App() {
     }
     body {
       background-color: ${(props) => props.theme.palette.cream};
+      line-height: 1;
       color: black;
-      font-family: ${(props) => props.theme.fontFamily};
+      font-family: 'DM Sans', sans-serif;
       min-height: 100vh;
       min-width: 100vw;
     };
+    h1{font-size: clamp(1.75em,3vw,4em);padding:0.25em 0};
+    h2{font-size: clamp(1.5em, 2vw,3em);padding:0.25em 0};
+    h3{font-size: clamp(1em,0.75vw,1.5em);padding:0.25em 0};
+    span{font-size: clamp(0.95em, 1vw,1em);padding:0.25em 0}
 
-    .attribution { font-size: 11px; text-align: center; }
-    .attribution a { color: hsl(228, 45%, 44%); }
+    .attribution { padding: 0.75em;font-size: 11px; text-align: center; }
+    .attribution a { font-size: 11px; text-align: center; color: hsl(228, 45%, 44%); }
 `;
+
+function App() {
+  const [{ data, loading, error }] = useAxios("/data.json");
+  if (loading) return <p>Loading...</p>;
+  if (error) return <p>Error!</p>;
   return (
-    <ThemeProvider theme={defaultTheme}>
+    <>
       <GlobalStyle />
       <StyledApp>
         <Balance />
-        <Chart />
+        <Chart data={data} />
         <div className="attribution">
           Challenge by{" "}
           <a
@@ -84,7 +90,7 @@ function App() {
           . Coded by <a href="https://www.stefan-wright.com">Stefan</a>.
         </div>
       </StyledApp>
-    </ThemeProvider>
+    </>
   );
 }
 

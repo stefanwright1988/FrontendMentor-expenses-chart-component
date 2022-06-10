@@ -3,7 +3,7 @@ import { DefaultTheme } from "styled-components";
 export const defaultTheme: DefaultTheme = {
   borderRadiusLarge: "20px",
   borderRadiusSmall: "5px",
-  fontFamily: "Helvetica Neue",
+  fontFamily: "DM Sans",
   palette: {
     darkbrown: "hsl(25, 47%, 15%)",
     mediumbrown: "hsl(28, 10%, 53%)",

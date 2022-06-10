@@ -1,10 +1,10 @@
 import React from "react";
-import { H2, HeaderContainer } from "./Header.styled";
+import { HeaderContainer } from "./Header.styled";
 
 const Header = () => {
   return (
     <HeaderContainer>
-      <H2>Spending - Last 7 days</H2>
+      <h2>Spending - Last 7 days</h2>
     </HeaderContainer>
   );
 };

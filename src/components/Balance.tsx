@@ -1,13 +1,13 @@
-import React from "react";
-import { BalanceContainer, BalanceInner } from "./Balance.styled";
+import { BalanceContainer, BalanceInner, BalanceLogo } from "./Balance.styled";
 
 const Balance = () => {
   return (
     <BalanceContainer>
       <BalanceInner>
-        <h3>Balance</h3>
-        <span>£123.45</span>
+        <span>My Balance</span>
+        <h2>£123.45</h2>
       </BalanceInner>
+      <BalanceLogo alt="logo" src="/logo.svg" />
     </BalanceContainer>
   );
 };

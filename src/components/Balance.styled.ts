@@ -1,6 +1,8 @@
 import styled from "styled-components";
 const BalanceContainer = styled.div`
-  width: 33.33%;
+  width: 25vw;
+  min-width: 360px;
+  max-width: 620px;
   background-color: ${(props) => props.theme.palette.softred};
   border-radius: ${(props) => props.theme.borderRadiusLarge};
   display: flex;
@@ -8,6 +10,7 @@ const BalanceContainer = styled.div`
   align-items: center;
   justify-content: flex-start;
   margin-bottom: 1rem;
+  color: white;
 `;
 
 const BalanceInner = styled.div`
@@ -17,4 +20,9 @@ const BalanceInner = styled.div`
   padding: 1rem 0;
   margin-left: 5%;
 `;
-export { BalanceContainer, BalanceInner };
+
+const BalanceLogo = styled.img`
+  margin-right: 1rem;
+`;
+
+export { BalanceContainer, BalanceInner, BalanceLogo };

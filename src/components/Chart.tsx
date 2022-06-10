@@ -1,25 +1,46 @@
 import React from "react";
 import Bar from "./Bar";
-import { ChartContainer, ChartInner, ChartSummary } from "./Chart.styled";
+import {
+  ChartContainer,
+  ChartInner,
+  ChartSummaryColumnLeft,
+  ChartSummaryColumnRight,
+  ChartSummaryRow,
+} from "./Chart.styled";
 import Header from "./Header";
 
-const Chart = () => {
+const Chart = ({ data }: any) => {
+  const weeklyAmounts = data.map(
+    (dataRow: { amount: number }) => dataRow.amount
+  );
+  const maxWeeklyAmount = Math.max(...weeklyAmounts);
+
+  const WeeklyTotal = data.reduce(
+    (prev: any, dataRow: any) => prev + dataRow.amount,
+    0
+  );
   return (
     <ChartContainer>
       <Header />
       <ChartInner>
-        <Bar value={50} day="Mon" />
-        <Bar value={57} day="Tue" />
-        <Bar value={89} day="Wed" />
-        <Bar value={50} day="Thu" />
-        <Bar value={34} day="Fri" />
-        <Bar value={80} day="Sat" />
-        <Bar value={20} day="Sun" />
+        {data.map((dataRow: any) => (
+          <Bar
+            key={dataRow.day}
+            value={(dataRow.amount / maxWeeklyAmount) * 100}
+            day={dataRow.day}
+          />
+        ))}
       </ChartInner>
-      <ChartSummary>
-        <h2>Total this month</h2>
-        <span>£1234.56</span>
-      </ChartSummary>
+      <ChartSummaryRow>
+        <ChartSummaryColumnLeft>
+          <span>Total this month</span>
+          <h1>£{WeeklyTotal}</h1>
+        </ChartSummaryColumnLeft>
+        <ChartSummaryColumnRight>
+          <h3>+2.4%</h3>
+          <span>from last month</span>
+        </ChartSummaryColumnRight>
+      </ChartSummaryRow>
     </ChartContainer>
   );
 };
