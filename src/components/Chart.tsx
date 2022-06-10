@@ -26,7 +26,8 @@ const Chart = ({ data }: any) => {
         {data.map((dataRow: any) => (
           <Bar
             key={dataRow.day}
-            value={(dataRow.amount / maxWeeklyAmount) * 100}
+            height={(dataRow.amount / maxWeeklyAmount) * 100}
+            value={dataRow.amount}
             day={dataRow.day}
           />
         ))}
